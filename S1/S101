@@ -1,0 +1,9 @@
+SQL (Structured Query Language) is a language — not a database itself. It's used to query and manage relational databases.
+MySQL is a database system that uses SQL as its language. It's one of many relational databases (others include PostgreSQL, SQLite, SQL Server).
+NoSQL is a category of databases that don't use the traditional relational/table structure. Examples: MongoDB, Redis, Cassandra
+
+-------------
+Simple analogy:
+SQL = English (the language)
+MySQL = A book written in English
+NoSQL = A book written in a completely different language with a different structure
