@@ -1,0 +1,29 @@
+What is an API?
+API (Application Programming Interface) is a way for two applications to communicate with each other using a set of rules.
+
+Simple analogy: You (client) → Waiter (API) → Kitchen (Server)
+
+Types of APIs
+1. REST API (Most Common)
+Uses HTTP methods, returns JSON. Simple and widely used.
+2. SOAP API
+Uses XML format. Older, used in banking/enterprise systems.
+3. GraphQL API
+You ask exactly what data you need — no over-fetching.
+4. WebSocket API
+Real-time, two-way communication (chat apps, live scores).
+5. Open API
+Publicly available for anyone (Twitter API, Weather API).
+6. Private API
+Used internally within a company only.
+
+
+HTTP Methods
+Method    Action             Example
+GET      Read data         Get user info
+POST      Create data      Register a user
+PUT       Update (full)    Update profile
+PATCH     Update (partial)  Change just email
+DELETE     Delete data       Remove account
+
+
