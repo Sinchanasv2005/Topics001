@@ -28,32 +28,179 @@ DELETE     Delete data       Remove account
 
 
 
+
+------------------
+# 🌐 API & HTTP Methods — Quick Notes
+
+## What is an API?
+An **API (Application Programming Interface)** lets two apps talk to each other.
+Think of it as a **waiter** — you (client) order food, waiter (API) carries it to the kitchen (server) and brings back the response.
+
+---
+
+## What is HTTP?
+**HTTP (HyperText Transfer Protocol)** is the language used to communicate over the web.
+Every request has:
+- **URL** → where to send the request
+- **Method** → what action to do (GET, POST, PUT, DELETE)
+- **Headers** → extra info (like auth token)
+- **Body** → data you send (for POST/PUT)
+
+---
+
+## HTTP Methods
+
+### ✅ GET — Read / Fetch data
+> "Give me the data"
+
+```http
+GET https://api.example.com/users/1
+```
+
+**Response:**
+```json
+{
+  "id": 1,
+  "name": "Sinchana",
+  "email": "sinchana@example.com"
+}
+```
+- No body in request
+- Safe & idempotent (calling it 10 times = same result)
+
+---
+
+### ➕ POST — Create new data
+> "Here's new data, save it"
+
+```http
+POST https://api.example.com/users
+Content-Type: application/json
+
+{
+  "name": "Sinchana",
+  "email": "sinchana@example.com"
+}
+```
+
+**Response:**
+```json
+{
+  "id": 5,
+  "message": "User created successfully"
+}
+```
+- Has a **body**
+- Not idempotent (calling it 10 times = 10 new records)
+
+---
+
+### ✏️ PUT — Update existing data
+> "Replace this with new data"
+
+```http
+PUT https://api.example.com/users/5
+Content-Type: application/json
+
+{
+  "name": "Sinchana SV",
+  "email": "sv@example.com"
+}
+```
+
+**Response:**
+```json
+{
+  "id": 5,
+  "message": "User updated successfully"
+}
+```
+- Replaces the **entire** resource
+- Idempotent (same result if called multiple times)
+
+---
+
+### 🗑️ DELETE — Remove data
+> "Delete this record"
+
+```http
+DELETE https://api.example.com/users/5
+```
+
+**Response:**
+```json
+{
+  "message": "User deleted"
+}
+```
+
+---
+
+## Quick Comparison Table
+
+| Method | Action   | Has Body? | Idempotent? | Use Case              |
+|--------|----------|-----------|-------------|----------------------|
+| GET    | Read     | ❌ No     | ✅ Yes      | Fetch user, list data |
+| POST   | Create   | ✅ Yes    | ❌ No       | Register, submit form |
+| PUT    | Update   | ✅ Yes    | ✅ Yes      | Edit profile          |
+| DELETE | Remove   | ❌ No     | ✅ Yes      | Delete account        |
+
+---
+
+## HTTP Status Codes (Must Know)
+
+| Code | Meaning               |
+|------|-----------------------|
+| 200  | ✅ OK                 |
+| 201  | ✅ Created            |
+| 400  | ❌ Bad Request        |
+| 401  | 🔐 Unauthorized       |
+| 404  | 🔍 Not Found          |
+| 500  | 💥 Server Error       |
+
+---
+
+## Python Example (using `requests`)
+
+```python
 import requests
 
-# Your API key (you get this after signing up on the API website)
-api_key = "your_api_key_here"
+BASE = "https://jsonplaceholder.typicode.com"
 
-# The other system's URL
-url = "https://api.openweathermap.org/data/2.5/weather"
+# GET
+res = requests.get(f"{BASE}/posts/1")
+print(res.json())
 
-# Parameters you send along
-params = {
-    "q": "Bengaluru",       # city name
-    "appid": api_key,       # your key
-    "units": "metric"       # celsius
-}
+# POST
+res = requests.post(f"{BASE}/posts", json={"title": "Hello", "body": "World"})
+print(res.status_code)  # 201
 
-# Call the other system
-response = requests.get(url, params=params)
+# PUT
+res = requests.put(f"{BASE}/posts/1", json={"title": "Updated"})
+print(res.json())
 
-# Read what it sends back
-data = response.json()
+# DELETE
+res = requests.delete(f"{BASE}/posts/1")
+print(res.status_code)  # 200
+```
 
-print("City   :", data["name"])
-print("Temp   :", data["main"]["temp"], "°C")
-print("Weather:", data["weather"][0]["description"])
+> 💡 `jsonplaceholder.typicode.com` is a free fake API — great for practicing!
 
-output
-City   : Bengaluru
-Temp   : 27.5 °C
-Weather: partly cloudy
+---
+
+## Key Terms
+
+| Term        | Meaning                                      |
+|-------------|----------------------------------------------|
+| Endpoint    | A specific URL path (`/users`, `/posts/1`)   |
+| Request     | What the client sends to the server          |
+| Response    | What the server sends back                   |
+| JSON        | Most common data format for APIs             |
+| REST API    | API that follows HTTP rules (most common)    |
+| Auth Token  | Key sent in headers to prove identity        |
+
+
+
+
+
+
