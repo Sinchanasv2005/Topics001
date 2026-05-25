@@ -7,3 +7,18 @@ Simple analogy:
 SQL = English (the language)
 MySQL = A book written in English
 NoSQL = A book written in a completely different language with a different structure
+
+
+Topic1
+CREATE TABLE + Data 
+INSERT INTO
+SELECT + DISTINCT + AS
+WHERE + all operators (LIKE, BETWEEN, IN)5UPDATE ⚠
+DELETE vs TRUNCATE vs DROP
+ORDER BY ASC/DESC
+GROUP BY + COUNT, SUM, AVG, MAX, MIN
+JOIN (INNER, LEFT, RIGHT, 3-table)
+ALTER TABLE
+All Constraints
+Subqueries
+Query Writing Order (cheat formula!)
